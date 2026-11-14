@@ -39,13 +39,13 @@ go build
 go_mmu_calc [OPTIONS] [COLOURS...]
 ```
 
-| Option                     | Description                                   |
-| -------------------------- | --------------------------------------------- |
+| Option                     | Description                                    |
+| -------------------------- | ---------------------------------------------- |
 | `-l`, `--list-colors`      | List all available colour names (alphabetical) |
-| `-lh`, `--list-colors-hue` | List all available colour names (by hue)      |
-| `-m`, `--multiplier FLOAT` | Flush volume multiplier (default: `1.0`)      |
-| `--no-color`               | Disable coloured terminal output              |
-| `-h`, `--help`             | Show help                                     |
+| `-lh`, `--list-colors-hue` | List all available colour names (by hue)       |
+| `-m`, `--multiplier FLOAT` | Flush volume multiplier (default: `1.0`)       |
+| `--no-color`               | Disable coloured terminal output               |
+| `-h`, `--help`             | Show help                                      |
 
 If no colours are passed, the tool asks for the number of filaments, each colour,
 and the multiplier interactively.
