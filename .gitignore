@@ -1,0 +1,8 @@
+# Build output
+/go_mmu_calc
+/mmu_calc_go
+*.exe
+
+# Test / coverage artifacts
+*.test
+*.out
