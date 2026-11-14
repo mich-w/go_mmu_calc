@@ -280,7 +280,7 @@ func hexToRGBA(hexCode string) ([4]int, error) {
 	if len(hexCode) == 6 {
 		hexCode += "ff"
 	}
-	if len(hexCode) != 8 {
+	if len(hexCode) != 8 || !isHex(strings.ToLower(hexCode)) {
 		return [4]int{}, fmt.Errorf("invalid hex colour spec: %s", hexCode)
 	}
 
@@ -298,19 +298,34 @@ func parseHex(s string) uint64 {
 	return v
 }
 
-// parseColour resolves a colour name or hex string to a normalised hex code.
+// isHex reports whether s consists only of lowercase hex digits.
+func isHex(s string) bool {
+	for _, c := range s {
+		if !strings.ContainsRune("0123456789abcdef", c) {
+			return false
+		}
+	}
+	return true
+}
+
+// parseColour resolves a colour name or hex string (#rgb, #rrggbb or
+// #rrggbbaa) to a normalised #rrggbbaa hex code.
 func parseColour(colour string) (string, error) {
 	hexCode := nameToHex(colour)
 	if hexCode == "" {
 		return "", fmt.Errorf("unknown colour specifier: '%s'", colour)
 	}
-	if !strings.HasPrefix(hexCode, "#") {
-		return "", fmt.Errorf("invalid hex colour: %s", hexCode)
+	digits := hexCode[1:]
+	if len(digits) == 3 {
+		digits = string([]byte{digits[0], digits[0], digits[1], digits[1], digits[2], digits[2]})
 	}
-	if len(hexCode) == 7 {
-		hexCode += "ff"
+	if len(digits) == 6 {
+		digits += "ff"
 	}
-	return hexCode, nil
+	if len(digits) != 8 || !isHex(digits) {
+		return "", fmt.Errorf("not a valid hex colour (use #rgb, #rrggbb or #rrggbbaa)")
+	}
+	return "#" + digits, nil
 }
 
 func nameToHex(name string) string {

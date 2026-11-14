@@ -115,6 +115,7 @@ func TestHexToRGBA(t *testing.T) {
 		{"#000000ff", [4]int{0, 0, 0, 255}, false},
 		{"#ffffff", [4]int{255, 255, 255, 255}, false},
 		{"#fff", [4]int{}, true},
+		{"#zzzzzz", [4]int{}, true},
 		{"invalid", [4]int{}, true},
 		{"", [4]int{}, true},
 	}
@@ -151,6 +152,13 @@ func TestParseColour(t *testing.T) {
 		{"#00ff00ff", "#00ff00ff", false},
 		{"RED", "#ff0000ff", false},
 		{"Red", "#ff0000ff", false},
+		{"#fff", "#ffffffff", false},
+		{"#F80", "#ff8800ff", false},
+		{"#AABBCC", "#aabbccff", false},
+		{"#zzzzzz", "", true},
+		{"#ff00", "", true},
+		{"#ff00000", "", true},
+		{"#", "", true},
 		{"invalid", "", true},
 	}
 
