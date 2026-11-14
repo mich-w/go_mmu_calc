@@ -8,6 +8,10 @@ The calculation replicates the colour-based flush volume algorithm used by
 [OrcaSlicer](https://github.com/SoftFever/OrcaSlicer), so the results can be pasted
 straight into your slicer's flushing volume table.
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="go_mmu_calc output: colour list with swatches and a 5x5 flush-volume matrix" width="423">
+</p>
+
 ## Features
 
 - Pairwise flush-volume matrix for up to 10 filaments
